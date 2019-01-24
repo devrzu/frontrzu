@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  @Output() updateKeyword = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  onSubmit(form: NgForm) {
+    const search_keyword = form.value['search-input'];
+    // this.updateKeyword.emit(search_keyword);
+      this.router.navigate(['/feeds', search_keyword]);
+    // this.feedComponent.getCommentList(search_keyword);
+  }
 }

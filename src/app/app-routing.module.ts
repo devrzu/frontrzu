@@ -4,7 +4,8 @@ import { FeedComponent } from './feed/feed.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/feeds', pathMatch: 'full' },
-  { path: 'feeds', component: FeedComponent }
+  { path: 'feeds', component: FeedComponent },
+  { path: 'feeds/:keyword', component: FeedComponent }
 ];
 
 @NgModule({
