@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { NgForm } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-menu",
-  templateUrl: "./menu.component.html",
-  styleUrls: ["./menu.component.css"]
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
   @Output() updateKeyword = new EventEmitter<any>();
@@ -15,14 +15,14 @@ export class MenuComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit(form: NgForm) {
-    const search_keyword = form.value["search-input"];
+    const search_keyword = form.value['search-input'];
     // this.updateKeyword.emit(search_keyword);
     this.getCommentList(search_keyword);
     // this.feedComponent.getCommentList(search_keyword);
   }
 
   getCommentList(search_keyword: string) {
-    this.router.navigate(["/feeds", search_keyword]);
+    this.router.navigate(['/feeds', search_keyword]);
   }
   onSearchChange(search_keyword: string) {
     if (search_keyword.length >= 2) {
