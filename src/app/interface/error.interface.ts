@@ -1,4 +1,4 @@
 export interface Error {
-    error: string[];
-    message: string;
+  error: string[];
+  message: string;
 }

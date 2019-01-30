@@ -6,7 +6,6 @@ import { ToastNotificationInterface } from './toast-notification.interface';
 
 @Injectable()
 export class ToastNotificationService implements OnInit {
-
   toastConfig: ToastNotificationInterface;
   confirmBox: Observable<any>;
   constructor(public snotifyService: SnotifyService) {
@@ -23,19 +22,22 @@ export class ToastNotificationService implements OnInit {
       pauseHover: true,
       maxHeight: 300,
       titleMaxLength: 15,
-      bodyMaxLength: 80,
+      bodyMaxLength: 80
     };
   }
 
   ngOnInit() {
-    this.snotifyService.setDefaults({global: {
-      newOnTop: false,
-    }, toast: {
-      timeout: 3000,
-      titleMaxLength: 14,
-      bodyMaxLength: 40,
-      position: this.toastConfig.position,
-    }});
+    this.snotifyService.setDefaults({
+      global: {
+        newOnTop: false
+      },
+      toast: {
+        timeout: 3000,
+        titleMaxLength: 14,
+        bodyMaxLength: 40,
+        position: this.toastConfig.position
+      }
+    });
 
     // this.snotifyService.onInit = (toast: SnotifyToast) => {
     //   // tslint:disable-next-line:no-console
@@ -74,14 +76,17 @@ export class ToastNotificationService implements OnInit {
   }
 
   setGlobal() {
-    this.snotifyService.setDefaults({global: {
-          newOnTop: false,
-        }, toast: {
-          timeout: 3000,
-          titleMaxLength: 14,
-          bodyMaxLength: 40,
-          position: this.toastConfig.position,
-        }});
+    this.snotifyService.setDefaults({
+      global: {
+        newOnTop: false
+      },
+      toast: {
+        timeout: 3000,
+        titleMaxLength: 14,
+        bodyMaxLength: 40,
+        position: this.toastConfig.position
+      }
+    });
     // this.snotifyService.setConfig({
     //   bodyMaxLength: this.toastConfig.bodyMaxLength,
     //   titleMaxLength: this.toastConfig.titleMaxLength,
@@ -100,7 +105,7 @@ export class ToastNotificationService implements OnInit {
       timeout: this.toastConfig.timeout,
       showProgressBar: this.toastConfig.progressBar,
       closeOnClick: this.toastConfig.closeClick,
-      pauseOnHover: this.toastConfig.pauseHover,
+      pauseOnHover: this.toastConfig.pauseHover
     });
   }
   onInfo() {
@@ -109,7 +114,7 @@ export class ToastNotificationService implements OnInit {
       timeout: this.toastConfig.timeout,
       showProgressBar: this.toastConfig.progressBar,
       closeOnClick: this.toastConfig.closeClick,
-      pauseOnHover: this.toastConfig.pauseHover,
+      pauseOnHover: this.toastConfig.pauseHover
     });
   }
   onError() {
@@ -118,7 +123,7 @@ export class ToastNotificationService implements OnInit {
       timeout: this.toastConfig.timeout,
       showProgressBar: this.toastConfig.progressBar,
       closeOnClick: this.toastConfig.closeClick,
-      pauseOnHover: this.toastConfig.pauseHover,
+      pauseOnHover: this.toastConfig.pauseHover
     });
   }
   onWarning() {
@@ -127,7 +132,7 @@ export class ToastNotificationService implements OnInit {
       timeout: this.toastConfig.timeout,
       showProgressBar: this.toastConfig.progressBar,
       closeOnClick: this.toastConfig.closeClick,
-      pauseOnHover: this.toastConfig.pauseHover,
+      pauseOnHover: this.toastConfig.pauseHover
     });
   }
   onSimple() {
@@ -141,13 +146,15 @@ export class ToastNotificationService implements OnInit {
       showProgressBar: this.toastConfig.progressBar,
       closeOnClick: this.toastConfig.closeClick,
       pauseOnHover: this.toastConfig.pauseHover,
-      icon,
+      icon
     });
   }
 
   onAsyncLoading(observable: Observable<any>) {
     this.setGlobal();
-    const id = this.snotifyService.async(this.toastConfig.title, this.toastConfig.body,
+    const id = this.snotifyService.async(
+      this.toastConfig.title,
+      this.toastConfig.body,
       /*
       You should pass Promise or Observable of type SnotifyConfig to change some data or do some other actions
       More information how to work with observables:
@@ -160,7 +167,7 @@ export class ToastNotificationService implements OnInit {
       // })
       Observable.create(observer => {
         observer.next({
-          body: 'Processing...',
+          body: 'Processing...'
         });
         observable.subscribe(
           (success: any) => observer.complete(),
@@ -170,37 +177,48 @@ export class ToastNotificationService implements OnInit {
               observer.complete();
               // this.snotifyService.remove(id);
             }, 1000);
-          });
-      },
-      ),
+          }
+        );
+      })
     );
   }
 
   onConfirmation() {
-
-
     this.confirmBox = new Observable(observer => {
       this.setGlobal();
       /*
          Here we pass an buttons array, which contains of 2 element of type SnotifyButton
           */
-      const id = this.snotifyService.confirm(this.toastConfig.title, this.toastConfig.body, {
-        timeout: this.toastConfig.timeout,
-        showProgressBar: this.toastConfig.progressBar,
-        closeOnClick: this.toastConfig.closeClick,
-        pauseOnHover: this.toastConfig.pauseHover,
-        buttons: [
-          // tslint:disable-next-line:no-console
-          { text: 'Yes', action: () => { observer.next(); /*this.snotifyService.remove(id);*/ }, bold: false },
-          // tslint:disable-next-line:max-line-length
-          // tslint:disable-next-line:no-console
-          { text: 'No', action: () => { observer.error(); /*this.snotifyService.remove(id);*/ }, bold: true },
-        ],
-      });
+      const id = this.snotifyService.confirm(
+        this.toastConfig.title,
+        this.toastConfig.body,
+        {
+          timeout: this.toastConfig.timeout,
+          showProgressBar: this.toastConfig.progressBar,
+          closeOnClick: this.toastConfig.closeClick,
+          pauseOnHover: this.toastConfig.pauseHover,
+          buttons: [
+            // tslint:disable-next-line:no-console
+            {
+              text: 'Yes',
+              action: () => {
+                observer.next(); /*this.snotifyService.remove(id);*/
+              },
+              bold: false
+            },
+            // tslint:disable-next-line:max-line-length
+            // tslint:disable-next-line:no-console
+            {
+              text: 'No',
+              action: () => {
+                observer.error(); /*this.snotifyService.remove(id);*/
+              },
+              bold: true
+            }
+          ]
+        }
+      );
     });
-
-
-
   }
 
   onPrompt() {
@@ -210,25 +228,33 @@ export class ToastNotificationService implements OnInit {
      At the action of the first button we can get what user entered into input field.
      At the second we can't get it. But we can remove this toast
      */
-    const id = this.snotifyService.prompt(this.toastConfig.title, this.toastConfig.body, {
-      timeout: this.toastConfig.timeout,
-      showProgressBar: this.toastConfig.progressBar,
-      closeOnClick: this.toastConfig.closeClick,
-      pauseOnHover: this.toastConfig.pauseHover,
-      buttons: [
-        // tslint:disable-next-line:no-console
-        { text: 'Yes', action: (text) => console.log(`Said Yes: ${text}`) },
-        // tslint:disable-next-line:no-console
-        { text: 'No', action: (text) => { console.log(`Said No: ${text}`); /*this.snotifyService.remove(id);*/ } },
-      ],
-      placeholder: 'This is the example placeholder which you can pass', // Max-length = 40
-    });
+    const id = this.snotifyService.prompt(
+      this.toastConfig.title,
+      this.toastConfig.body,
+      {
+        timeout: this.toastConfig.timeout,
+        showProgressBar: this.toastConfig.progressBar,
+        closeOnClick: this.toastConfig.closeClick,
+        pauseOnHover: this.toastConfig.pauseHover,
+        buttons: [
+          // tslint:disable-next-line:no-console
+          { text: 'Yes', action: text => console.log(`Said Yes: ${text}`) },
+          // tslint:disable-next-line:no-console
+          {
+            text: 'No',
+            action: text => {
+              console.log(
+                `Said No: ${text}`
+              ); /*this.snotifyService.remove(id);*/
+            }
+          }
+        ],
+        placeholder: 'This is the example placeholder which you can pass' // Max-length = 40
+      }
+    );
   }
-
 
   onClear() {
     this.snotifyService.clear();
   }
-
-
 }

@@ -14,12 +14,11 @@ import { BaseService } from './services/base.service';
 import { HttpService } from './services/http.service';
 import { HelperService } from './services/helper.service';
 
-import { SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 
 import { CustomErrorHandlerService } from './services/custom-error-handler.service';
 import { ToastNotificationService } from './services/toast-notification.service';
-
 
 @NgModule({
   declarations: [
@@ -38,10 +37,15 @@ import { ToastNotificationService } from './services/toast-notification.service'
     SlimLoadingBarModule.forRoot()
     // RouterModule.forRoot(routes),
   ],
-  providers: [ BaseService, HttpService, SnotifyService, HelperService,
-    CustomErrorHandlerService, ToastNotificationService,
-    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+  providers: [
+    BaseService,
+    HttpService,
+    SnotifyService,
+    HelperService,
+    CustomErrorHandlerService,
+    ToastNotificationService,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

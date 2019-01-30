@@ -1,3 +1,3 @@
 export interface ServerResponse {
-    hits: any;
+  hits: any;
 }

@@ -1,16 +1,21 @@
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-
 import { Injectable } from '@angular/core';
-import { Headers, Http, Request, RequestOptions, Response, XHRBackend } from '@angular/http';
+import {
+  Headers,
+  Http,
+  Request,
+  RequestOptions,
+  Response,
+  XHRBackend
+} from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { appVariables } from '../app.constants';
-import {ServerResponse} from '../interface/server-response.interface';
+import { ServerResponse } from '../interface/server-response.interface';
 // import { HelperService } from './helper.service';
-
 
 @Injectable()
 export class HttpService extends Http {
@@ -19,9 +24,10 @@ export class HttpService extends Http {
     super(backend, options);
   }
 
-
-  request(url: string | Request, options?: RequestOptions): Observable<Response> {
-
+  request(
+    url: string | Request,
+    options?: RequestOptions
+  ): Observable<Response> {
     if (typeof url === 'string') {
       if (!options) {
         // let's make an option object
@@ -31,9 +37,8 @@ export class HttpService extends Http {
     } else {
       this.createRequestOptions(url);
     }
-    return super.request(url, options).catch((res) => this.catchAuthError(res));
+    return super.request(url, options).catch(res => this.catchAuthError(res));
   }
-
 
   createRequestOptions(options: RequestOptions | Request) {
     // const token: string = localStorage.getItem(appVariables.accessTokenLocalStorage);
@@ -46,7 +51,10 @@ export class HttpService extends Http {
     //   }
     //   // options.headers.append('Authorization', token);
     // }
-    options.headers.append('Content-Type', appVariables.defaultContentTypeHeader);
+    options.headers.append(
+      'Content-Type',
+      appVariables.defaultContentTypeHeader
+    );
   }
   catchAuthError(res: Response) {
     // we have to pass HttpService's own instance here as `self`return (res: Response) => {
@@ -57,4 +65,3 @@ export class HttpService extends Http {
     return Observable.throw(res);
   }
 }
-

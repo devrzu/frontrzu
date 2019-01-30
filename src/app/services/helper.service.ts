@@ -13,8 +13,7 @@ function getWindow(): any {
 @Injectable()
 export class HelperService {
   addContentTypeHeader: boolean | string = true;
-  constructor(public slimLoadingBarService: SlimLoadingBarService) {
-  }
+  constructor(public slimLoadingBarService: SlimLoadingBarService) {}
 
   // return the global window object
   get nativeWindow(): any {
@@ -27,7 +26,6 @@ export class HelperService {
    */
   serverLogger(log: any) {
     // tslint:disable-next-line:no-console
-
   }
 
   secondsTicksCounter(): object {
@@ -36,7 +34,7 @@ export class HelperService {
     let interval;
     return {
       start: () => {
-        return setInterval(function () {
+        return setInterval(function() {
           seconds++;
         }, 1000);
       },
@@ -44,45 +42,76 @@ export class HelperService {
         clearInterval(intervalInstance);
         return seconds;
       },
-      intervalInstance: null,
+      intervalInstance: null
     };
   }
 
-  initFormControls(self: object, formGroup: FormGroup, controlNames: string[]): void {
+  initFormControls(
+    self: object,
+    formGroup: FormGroup,
+    controlNames: string[]
+  ): void {
     for (const controlName of controlNames) {
       self[controlName] = formGroup.controls[controlName];
     }
   }
 
-  getInputValidationClass(formGroup: FormGroup, formControlName: string): string {
+  getInputValidationClass(
+    formGroup: FormGroup,
+    formControlName: string
+  ): string {
     if (formGroup) {
       const formControl: AbstractControl = formGroup.controls[formControlName];
       if (formControl && formControl.touched) {
-        return formControl.valid ? appVariables.successInputClass : appVariables.errorInputClass;
+        return formControl.valid
+          ? appVariables.successInputClass
+          : appVariables.errorInputClass;
       }
     }
 
     return '';
   }
 
-  getConfirmInputValidationClass(compareFromGroup: FormGroup,
-    formControl: AbstractControl, confirmFormControl: AbstractControl, test: FormGroup): string {
-    if ((formControl && formControl.touched) || (confirmFormControl && confirmFormControl.touched)) {
-      return compareFromGroup.valid ? appVariables.successInputClass : appVariables.errorInputClass;
+  getConfirmInputValidationClass(
+    compareFromGroup: FormGroup,
+    formControl: AbstractControl,
+    confirmFormControl: AbstractControl,
+    test: FormGroup
+  ): string {
+    if (
+      (formControl && formControl.touched) ||
+      (confirmFormControl && confirmFormControl.touched)
+    ) {
+      return compareFromGroup.valid
+        ? appVariables.successInputClass
+        : appVariables.errorInputClass;
     }
     if (formControl && formControl.touched) {
-      return formControl.valid ? appVariables.successInputClass : appVariables.errorInputClass;
+      return formControl.valid
+        ? appVariables.successInputClass
+        : appVariables.errorInputClass;
     } else {
       return '';
     }
   }
 
-  showCompareCtrlsValidationMsg(frmGroup: FormGroup, ctrl1: AbstractControl, ctrl2: AbstractControl): boolean {
-    return (frmGroup && !frmGroup.valid && (ctrl1.touched || ctrl1.touched)) ? true : false;
+  showCompareCtrlsValidationMsg(
+    frmGroup: FormGroup,
+    ctrl1: AbstractControl,
+    ctrl2: AbstractControl
+  ): boolean {
+    return frmGroup && !frmGroup.valid && (ctrl1.touched || ctrl1.touched)
+      ? true
+      : false;
   }
 
   showCtrlValidationMsg(formControl: AbstractControl): boolean {
-    return (formControl && !formControl.valid && formControl.touched && formControl.errors) ? true : false;
+    return formControl &&
+      !formControl.valid &&
+      formControl.touched &&
+      formControl.errors
+      ? true
+      : false;
   }
 
   getCtrlValidationMsg(formGroup: FormGroup, ctrlName: string): string {
@@ -93,9 +122,13 @@ export class HelperService {
         if (errors.required) {
           return validationMessages[ctrlName].required;
         } else if (errors.minlength && errors.minlength.requiredLength) {
-          return validationMessages[ctrlName].minLength(errors.minlength.requiredLength);
+          return validationMessages[ctrlName].minLength(
+            errors.minlength.requiredLength
+          );
         } else if (errors.maxlength && errors.maxlength.requiredLength) {
-          return validationMessages[ctrlName].maxLength(errors.maxlength.requiredLength);
+          return validationMessages[ctrlName].maxLength(
+            errors.maxlength.requiredLength
+          );
         } else if (errors.digitsOnly && !errors.digitsOnly.valid) {
           return validationMessages[ctrlName].digitsOnly();
         } else if (errors.validateEmail && !errors.validateEmail.valid) {
@@ -134,15 +167,16 @@ export class HelperService {
 
   getObjectKeys(object: {}): string[] {
     if (!object || typeof object !== 'object') {
-      throw new Error('Only objects can be passed to retrieve its own enumerable properties(keys).');
+      throw new Error(
+        'Only objects can be passed to retrieve its own enumerable properties(keys).'
+      );
     }
     return Object.keys(object);
   }
 
   searchInArray(inputArray, lookUpArray, caseSensitiveSearch): any[] {
     const result: any[] = [];
-    outer:
-    for (let index = 0; index < inputArray.length; index++) {
+    outer: for (let index = 0; index < inputArray.length; index++) {
       const item = inputArray[index];
       for (let i = 0; i < lookUpArray.length; i++) {
         const lookUpItem = lookUpArray[i];
@@ -155,15 +189,21 @@ export class HelperService {
     return result;
   }
 
-  searchInArrayTest(inputArray: any[], lookUpArray: any[], caseSensitiveSearch?: boolean, exactMatch?: boolean): any[] {
+  searchInArrayTest(
+    inputArray: any[],
+    lookUpArray: any[],
+    caseSensitiveSearch?: boolean,
+    exactMatch?: boolean
+  ): any[] {
     const result: any[] = [];
-    outer:
-    for (const item of inputArray) {
+    outer: for (const item of inputArray) {
       for (const lookUpItem of lookUpArray) {
-        const sourceString: string = caseSensitiveSearch ? item[lookUpItem.key].toString() :
-          item[lookUpItem.key].toString().toLocaleLowerCase();
-        const searchForString: string = caseSensitiveSearch ? lookUpItem.value.toString() :
-          lookUpItem.value.toString().toLocaleLowerCase();
+        const sourceString: string = caseSensitiveSearch
+          ? item[lookUpItem.key].toString()
+          : item[lookUpItem.key].toString().toLocaleLowerCase();
+        const searchForString: string = caseSensitiveSearch
+          ? lookUpItem.value.toString()
+          : lookUpItem.value.toString().toLocaleLowerCase();
         if (exactMatch) {
           if (sourceString === searchForString) {
             continue outer;

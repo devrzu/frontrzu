@@ -7,11 +7,14 @@ import { switchMap } from 'rxjs/operators';
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css'],
-  providers: [FeedService],
+  providers: [FeedService]
 })
 export class FeedComponent implements OnInit, OnDestroy {
-
-  constructor(private route: ActivatedRoute, private router: Router, private feedService: FeedService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private feedService: FeedService
+  ) {}
 
   private comments = [];
   private keyword: string;
@@ -40,14 +43,17 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   getCommentList(keyword) {
     console.log('keyword :' + keyword);
-    this.feedService.getCommentList(keyword).map(comments => {
-      console.log('before : ' + this.comments);
-      this.comments = comments;
-      console.log(comments);
-      // a.hits.hits.map(comment => {
-      //   console.log(comment._source.contents);
-      // });
-    }).subscribe();
+    this.feedService
+      .getCommentList(keyword)
+      .map(comments => {
+        console.log('before : ' + this.comments);
+        this.comments = comments;
+        console.log(comments);
+        // a.hits.hits.map(comment => {
+        //   console.log(comment._source.contents);
+        // });
+      })
+      .subscribe();
   }
   ngOnDestroy() {
     this.sub.unsubscribe();

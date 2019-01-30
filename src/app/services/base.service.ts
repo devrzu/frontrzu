@@ -12,28 +12,35 @@ import { HelperService } from './helper.service';
 
 @Injectable()
 export class BaseService {
-  constructor(public http: HttpService, public errorHandler: CustomErrorHandlerService,
-    public helperService: HelperService) {
-  }
+  constructor(
+    public http: HttpService,
+    public errorHandler: CustomErrorHandlerService,
+    public helperService: HelperService
+  ) {}
   get(url, options) {
     console.log(`options ${options}`);
     console.log(options);
     // Helper service to start ng2-slim-loading-bar progress bar
     this.helperService.startLoader();
-    return this.http.get(url, options).map((res: Response) => {
-      return this.handleResponse(res);
-    }).catch((error: Response) => Observable.throw(this.errorHandler.tryParseError(error)))
+    return this.http
+      .get(url, options)
+      .map((res: Response) => {
+        return this.handleResponse(res);
+      })
+      .catch((error: Response) =>
+        Observable.throw(this.errorHandler.tryParseError(error))
+      )
       .finally(() => {
-       // stop ng2-slim-loading-bar progress bar
+        // stop ng2-slim-loading-bar progress bar
         this.helperService.stopLoader();
       });
   }
 
-
   post(url, postBody: any, options?: RequestOptions) {
     this.helperService.startLoader();
     if (options) {
-      return this.http.post(url, postBody, options)
+      return this.http
+        .post(url, postBody, options)
         .map((res: Response) => {
           return this.handleResponse(res);
         })
@@ -42,7 +49,8 @@ export class BaseService {
           this.helperService.stopLoader();
         });
     } else {
-      return this.http.post(url, postBody)
+      return this.http
+        .post(url, postBody)
         .map((res: Response) => {
           return this.handleResponse(res);
         })
@@ -51,28 +59,31 @@ export class BaseService {
           this.helperService.stopLoader();
         });
     }
-
-
   }
   delete(url, postBody: any) {
     this.helperService.startLoader();
-    return this.http.delete(url).map((res: Response) => {
-      return this.handleResponse(res);
-    }).catch((error: Response) => Observable.throw(error))
+    return this.http
+      .delete(url)
+      .map((res: Response) => {
+        return this.handleResponse(res);
+      })
+      .catch((error: Response) => Observable.throw(error))
       .finally(() => {
         this.helperService.stopLoader();
       });
   }
   put(url, putData) {
     this.helperService.startLoader();
-    return this.http.put(url, putData).map((res: Response) => {
-      return this.handleResponse(res);
-    }).catch((error: Response) => Observable.throw(error))
+    return this.http
+      .put(url, putData)
+      .map((res: Response) => {
+        return this.handleResponse(res);
+      })
+      .catch((error: Response) => Observable.throw(error))
       .finally(() => {
         this.helperService.stopLoader();
       });
   }
-
 
   upload(url: string, file: File) {
     const formData: FormData = new FormData();
@@ -82,7 +93,6 @@ export class BaseService {
     this.helperService.addContentTypeHeader = false;
     return this.post(url, formData);
   }
-
 
   formUrlParam(url, data) {
     let queryString: string = '';
@@ -97,7 +107,6 @@ export class BaseService {
     }
     return url + queryString;
   }
-
 
   handleResponse(res: Response): ServerResponse {
     // My API sends a new jwt access token with each request,

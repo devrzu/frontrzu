@@ -3,11 +3,9 @@ import { Response, ResponseOptions } from '@angular/http';
 import { Error } from '../interface/error.interface';
 import { ToastNotificationService } from './toast-notification.service';
 
-
 @Injectable()
 export class CustomErrorHandlerService {
-  constructor(public snotify: ToastNotificationService) { }
-
+  constructor(public snotify: ToastNotificationService) {}
 
   tryParseError(error: Response): any {
     try {
@@ -21,7 +19,6 @@ export class CustomErrorHandlerService {
     }
   }
 
-
   parseCustomServerError(error: Error): any {
     const title = error.message;
     let body = '';
@@ -29,19 +26,19 @@ export class CustomErrorHandlerService {
       body += `${errorMsg}. `;
     }
 
-
     return { title, body };
   }
-
 
   createCustomError(error: Error): Response {
     try {
       const parsedError = this.parseCustomServerError(error);
       const responseOptions = new ResponseOptions({
-        body: { error: { title: parsedError.title, message: parsedError.body } },
+        body: {
+          error: { title: parsedError.title, message: parsedError.body }
+        },
         status: 400,
         headers: null,
-        url: null,
+        url: null
       });
       return new Response(responseOptions);
     } catch (ex) {
@@ -49,7 +46,7 @@ export class CustomErrorHandlerService {
         body: { title: 'Unknown Error!', message: 'Unknown Error Occurred.' },
         status: 400,
         headers: null,
-        url: null,
+        url: null
       });
       return new Response(responseOptions);
     }

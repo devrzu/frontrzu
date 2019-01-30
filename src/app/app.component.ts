@@ -12,7 +12,7 @@ import { FeedService } from './feed/feed.service';
 export class AppComponent {
   title = 'tossit';
 
-  constructor(private feedService: FeedService) { }
+  constructor(private feedService: FeedService) {}
 
   // @ViewChild(FeedComponent)
   //   private feedComponent: FeedComponent;

@@ -11,14 +11,14 @@ import { BaseService } from '../services/base.service';
 
 import { BehaviorSubject } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class FeedService {
-
-  constructor(protected http: HttpClient, public helperService: HelperService) {
-  }
+  constructor(
+    protected http: HttpClient,
+    public helperService: HelperService
+  ) {}
 
   private keywordSource = new BehaviorSubject('default message');
   keywordMessage = this.keywordSource.asObservable();
@@ -30,14 +30,18 @@ export class FeedService {
 
   getCommentList(contents = '와드'): Observable<any> {
     // const params = new HttpParams().set('page', page);
-    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    const headers = new HttpHeaders().set(
+      'Content-Type',
+      'application/json; charset=utf-8'
+    );
     // curl -XPOST -H 'Content-Type: application/json' http://35.236.172.109:9200/comments/finder/_search?pretty=true -d '{
     //     "query" : {
     //         "match" : { "contents" : "ㅊ" }
     //     }
     // }'
-    const query = {'query' : {'match' : { 'contents' : contents }}};
-    return this.http.post(appApiResources.comments, query, {headers: headers})
+    const query = { query: { match: { contents: contents } } };
+    return this.http
+      .post(appApiResources.comments, query, { headers: headers })
       .map((res: any) => {
         return res.hits.hits.map(comment => {
           return comment._source.contents;
@@ -45,8 +49,7 @@ export class FeedService {
         // return res;
       })
       .catch((error: Response) => Observable.throw(error))
-      .finally(() => {
-      });
+      .finally(() => {});
   }
   // getCommentDetail(id): Observable<any> {
   //   return this.http.get(`${appApiResources.block}/${id}`)
@@ -59,8 +62,5 @@ export class FeedService {
   // }
 }
 
-
 @Injectable()
-export class BlockService {
-
-}
+export class BlockService {}

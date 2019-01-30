@@ -10,21 +10,23 @@ function createUrl(actionName: string): string {
 export const appApiResources = {
   baseUrl: apiHost,
   comments: createUrl('comments/finder/_search'),
-  articles: createUrl('articles'),
+  articles: createUrl('articles')
 };
 
 export const appVariables = {
   defaultContentTypeHeader: 'application/json',
   errorInputClass: 'has-error',
-  successInputClass: 'has-success',
+  successInputClass: 'has-success'
 };
 
 export const validationMessages = {
   tttt: {
     required: 'tttt is required.',
-    digitsOnly() { return `Only digits are allowed in Pincode.`; },
+    digitsOnly() {
+      return `Only digits are allowed in Pincode.`;
+    }
   },
   bbbb: {
-    required: 'bbbb is required.',
-  },
+    required: 'bbbb is required.'
+  }
 };
