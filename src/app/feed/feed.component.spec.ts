@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientModule } from '@angular/common/http';
 import { FeedComponent } from './feed.component';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { HelperService } from '../services';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('FeedComponent', () => {
   let component: FeedComponent;
@@ -8,7 +12,9 @@ describe('FeedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FeedComponent]
+      imports: [HttpClientModule, RouterTestingModule],
+      declarations: [FeedComponent],
+      providers: [SlimLoadingBarService, HelperService]
     }).compileComponents();
   }));
 
