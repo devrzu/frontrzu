@@ -1,4 +1,4 @@
-# Tossit
+# Tossit [![CircleCI](https://circleci.com/gh/devrzu/frontrzu.svg?style=svg)](https://circleci.com/gh/devrzu/frontrzu)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
 
