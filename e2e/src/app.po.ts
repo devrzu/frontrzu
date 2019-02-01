@@ -5,7 +5,10 @@ export class AppPage {
     return browser.get('/');
   }
 
+  //
   getTitleText() {
-    return element(by.css('app-root h1')).getText();
+    return element(
+      by.xpath('/html/body/app-root/div/div/app-header/div/div/div/a[1]')
+    ).getText();
   }
 }
