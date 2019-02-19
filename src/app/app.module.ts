@@ -19,6 +19,8 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 
 import { CustomErrorHandlerService } from './services/custom-error-handler.service';
 import { ToastNotificationService } from './services/toast-notification.service';
+import { PostComponent } from './feed/post/post.component';
+import { CommentComponent } from './feed/post/comment.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ToastNotificationService } from './services/toast-notification.service'
     HeaderComponent,
     FooterComponent,
     MenuComponent,
-    FeedComponent
+    FeedComponent,
+    PostComponent,
+    CommentComponent
   ],
   imports: [
     FormsModule,
