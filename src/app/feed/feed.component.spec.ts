@@ -5,6 +5,8 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { HelperService } from '../services';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { PostComponent } from './post/post.component';
+import { CommentComponent } from './post/comment.component';
 
 describe('FeedComponent', () => {
   let component: FeedComponent;
@@ -13,7 +15,7 @@ describe('FeedComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule],
-      declarations: [FeedComponent],
+      declarations: [FeedComponent, PostComponent, CommentComponent],
       providers: [SlimLoadingBarService, HelperService]
     }).compileComponents();
   }));
