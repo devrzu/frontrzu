@@ -1,0 +1,17 @@
+.comment-user a {
+  margin-top: 3px;
+  padding: 0 0 0 8px;
+  color: #222;
+  font-weight: bold;
+  line-height: 22px;
+}
+.comment-user p {
+  padding: 10px 0 0 8px;
+  color: #222;
+  line-height: 20px;
+  word-break: break-all;
+}
+
+.comment-user small {
+  padding: 0 0 0 8px;
+}

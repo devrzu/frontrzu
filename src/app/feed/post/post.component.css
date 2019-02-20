@@ -1,0 +1,16 @@
+.post-contents {
+  padding: 14px 15px 50px;
+  color: #111;
+  line-height: 1.45;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.comment-wrapper {
+  padding: 20px 15px 0;
+  border-top: 1px solid #ececec;
+}
+.comment {
+  position: relative;
+  padding: 12px;
+  border-bottom: 1px solid #ececec;
+}

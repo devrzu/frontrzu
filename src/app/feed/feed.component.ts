@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { FeedService } from './feed.service';
+// import { FeedService } from './feed.service';
+import { FeedService } from './mock-feed.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
@@ -16,9 +17,9 @@ export class FeedComponent implements OnInit, OnDestroy {
     private feedService: FeedService
   ) {}
 
-  private comments = [];
   private keyword: string;
   private sub: any;
+  private posts = [];
 
   ngOnInit() {
     console.log(1);
@@ -45,13 +46,20 @@ export class FeedComponent implements OnInit, OnDestroy {
     console.log('keyword :' + keyword);
     this.feedService
       .getCommentList(keyword)
-      .map(comments => {
-        console.log('before : ' + this.comments);
-        this.comments = comments;
-        console.log(comments);
-        // a.hits.hits.map(comment => {
-        //   console.log(comment._source.contents);
+      .map(posts => {
+        console.log('before : ' + this.posts);
+        // posts.map(post => {
+        //   if (post.comments.length > 2) {
+        //     post.comments = [
+        //       post.comments[0],
+        //       post.comments[1],
+        //       post.comments[2]
+        //     ];
+        //   }
+        //   return post;
         // });
+        this.posts = posts;
+        console.log(posts);
       })
       .subscribe();
   }
