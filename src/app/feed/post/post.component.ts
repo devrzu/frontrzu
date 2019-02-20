@@ -14,12 +14,6 @@ export class PostComponent implements OnInit {
     console.log(`post-component ngOnChanges`);
   }
 
-  test() {
-    this.post.comments = [this.post.comments[1]];
-    console.log(this.post.title);
-    this.post = {};
-  }
-
   readMoreComments() {
     if (this.visibleAllComments) return;
     this.comments = this.post.comments;
