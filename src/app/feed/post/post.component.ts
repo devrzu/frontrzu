@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+const DEFAULT_COMMENT_DISPLAY_COUNT = 3;
+
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -14,11 +16,7 @@ export class PostComponent implements OnInit {
     console.log(`post-component ngOnChanges`);
   }
 
-  test() {
-    this.post.comments = [this.post.comments[1]];
-    console.log(this.post.title);
-    this.post = {};
-  }
+  // TODO(mock-data): Call comment data apart from post
 
   readMoreComments() {
     if (this.visibleAllComments) return;
@@ -26,8 +24,10 @@ export class PostComponent implements OnInit {
     this.visibleAllComments = true;
   }
 
-  ngOnInit() {
-    if (this.post.comments.length > 2) {
+  lessComments() {
+    // TODO(test): Input mock data in spec.ts
+    if (this.post === undefined) return;
+    if (this.post.comments.length >= DEFAULT_COMMENT_DISPLAY_COUNT) {
       this.visibleAllComments = false;
       this.comments = [
         this.post.comments[0],
@@ -37,5 +37,8 @@ export class PostComponent implements OnInit {
     } else {
       this.comments = this.post.comments;
     }
+  }
+  ngOnInit() {
+    this.lessComments();
   }
 }

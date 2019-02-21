@@ -4,17 +4,17 @@
     <div class="d-flex align-items-center">
       <h4>
         <a [routerLink]="" class="title" (click)="test(this)">{{
-          post.title
+          post?.title
         }}</a>
       </h4>
       <div class="ml-auto">
-        <a href="#" class="text-default">{{ post.userNick }}</a>
-        <small class="d-block text-muted">{{ post.datetime }}</small>
+        <a href="#" class="text-default">{{ post?.userNick }}</a>
+        <small class="d-block text-muted">{{ post?.datetime }}</small>
       </div>
     </div>
 
     <div class="post-contents">
-      {{ post.contents || 'No contents' }}
+      {{ post?.contents || 'No contents' }}
     </div>
     <div class="comment-wrapper">
       <div class="comment-head">

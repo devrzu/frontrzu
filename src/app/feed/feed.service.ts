@@ -20,14 +20,6 @@ export class FeedService {
     public helperService: HelperService
   ) {}
 
-  private keywordSource = new BehaviorSubject('default message');
-  keywordMessage = this.keywordSource.asObservable();
-
-  changeKeyword(message: string) {
-    console.log('changeKeyword : ' + message);
-    this.keywordSource.next(message);
-  }
-
   getCommentList(contents = '와드'): Observable<any> {
     // const params = new HttpParams().set('page', page);
     const headers = new HttpHeaders().set(
