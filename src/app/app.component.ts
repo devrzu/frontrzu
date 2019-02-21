@@ -16,10 +16,4 @@ export class AppComponent {
 
   // @ViewChild(FeedComponent)
   //   private feedComponent: FeedComponent;
-
-  tttt(event) {
-    console.log('event : ' + event);
-    this.feedService.changeKeyword(event);
-    // this.feedComponent.getCommentList(event);
-  }
 }
