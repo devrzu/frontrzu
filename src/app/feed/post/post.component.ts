@@ -29,11 +29,10 @@ export class PostComponent implements OnInit {
     if (this.post === undefined) return;
     if (this.post.comments.length >= DEFAULT_COMMENT_DISPLAY_COUNT) {
       this.visibleAllComments = false;
-      this.comments = [
-        this.post.comments[0],
-        this.post.comments[1],
-        this.post.comments[2]
-      ];
+      this.comments = this.post.comments.slice(
+        0,
+        DEFAULT_COMMENT_DISPLAY_COUNT
+      );
     } else {
       this.comments = this.post.comments;
     }
